@@ -1,5 +1,14 @@
-export default function Projects() {
+import Head from 'next/head'
+ 
+const Projects = () => {
   return (
-    <h1>Projects</h1>
+    <>
+      <Head>
+        <title>Moar! - Projects</title>
+      </Head>
+      <h1>Projects</h1>
+    </>
   )
 }
+
+export default Projects

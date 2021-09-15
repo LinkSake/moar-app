@@ -1,5 +1,14 @@
-export default function Tasks() {
+import Head from 'next/head'
+ 
+const Tasks = () => {
   return (
-    <h1>Tasks</h1>
+    <>
+      <Head>
+        <title>Moar! - Tasks</title>
+      </Head>
+      <h1>Tasks</h1>
+    </>
   )
 }
+
+export default Tasks
