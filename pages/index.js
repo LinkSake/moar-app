@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Styles from '../styles/home.module.css'
+import Styles from '../styles/pages/home.module.css'
 import { Grid, Header, Icon } from 'semantic-ui-react'
  
 const Home = () => {
