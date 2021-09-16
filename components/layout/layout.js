@@ -1,6 +1,6 @@
 import Navbar from './navbar'
 import { Grid } from 'semantic-ui-react'
-import Styles from '../../styles/layout/layout.module.css'
+import Styles from '../../styles/components/layout/layout.module.css'
 
 const Layout = ({children}) => {
   return (

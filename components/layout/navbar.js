@@ -13,7 +13,6 @@ const Navbar = () => {
     <Menu 
     pointing 
     secondary 
-    stackable 
     color='purple' 
     >
       <Link href='/'>
