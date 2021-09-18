@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import Note from '../../components/note'
-import Form from '../../components/form'
-import { Grid, Header, Modal, Button } from 'semantic-ui-react'
+import { Grid, Header } from 'semantic-ui-react'
+import ModalForm from '../../components/modal_form'
  
 const Projects = () => {
 
@@ -14,38 +14,16 @@ const Projects = () => {
     </Head>
   )
 
-  const newForm = () => (
-    <Modal
-    closeIcon
+  const newProject = () => (
+    <ModalForm
     open={open}
+    title='New Project'
+    deleteLabel='Delete'
+    confirmLabel='Confrim'
     onClose={() => { setOpen(!open) }} 
-    >
-      <Modal.Header>
-        New Project
-      </Modal.Header>
-      <Modal.Content>
-        <Modal.Description>
-          {/* Form */}
-          <p>
-            Foo foo!
-          </p>
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button
-        color='red'
-        onClick={() => { setOpen(!open) }} 
-        >
-          Delete project
-        </Button>
-        <Button
-        color='purple'
-        onClick={() => { setOpen(!open) }} 
-        >
-          Create project
-        </Button>
-      </Modal.Actions>
-    </Modal>
+    onDelete={() => { setOpen(!open) }} 
+    onConfirm={() => { setOpen(!open) }} 
+    />
   )
 
   const isProjectEmpty = projects => {
@@ -71,7 +49,7 @@ const Projects = () => {
   return (
     <>
       { head() }
-      { newForm() }
+      { newProject() }
       <Grid> 
         <Grid.Row>
           <Grid.Column width={16}>
