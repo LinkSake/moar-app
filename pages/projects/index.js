@@ -26,9 +26,14 @@ const Projects = () => {
   }
 
   const handleDeleteProject = () => {
-    alert('Project '+project.name+' deleted!')
-    setEditModal(false)
-    setProject({})
+    if ( confirm('Are you sure you want to delete this project?') ) {
+      // Temporary, this should delete the project
+      setEditModal(false)
+      setProject({})
+    } else {
+      setEditModal(false)
+      setProject({})
+    }
   }
 
 
