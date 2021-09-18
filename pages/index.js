@@ -1,9 +1,13 @@
 import Head from 'next/head'
+import { useContext } from 'react'
+import { Context } from '../context'
 import Note from '../components/note'
 import Styles from '../styles/pages/home.module.css'
 import { Grid, Header, Icon } from 'semantic-ui-react'
  
 const Home = () => {
+
+  const { dispatch } = useContext(Context)
 
   const head = () => (
     <Head>
@@ -34,10 +38,14 @@ const Home = () => {
         link='Create a project'
         title="😱 You haven't created a project yet!"
         message="
-          You can't track your task without a project; 
-          after creating a project here will appear the 
-          task you're currently working on.
-        "/>
+        You can't track your task without a project; 
+        after creating a project here will appear the 
+        task you're currently working on.
+        "
+        onClick={() => {
+          dispatch({ type: 'SET_ACTIVE_TAB', payload: '/projects' })
+        }}
+        />
       )
     } else if (projects[0].items.length === 0) {
       return (
@@ -49,6 +57,9 @@ const Home = () => {
         message="
         To make use of Moar and start tracking time,
         create a task!"
+        onClick={() => {
+          dispatch({ type: 'SET_ACTIVE_TAB', payload: '/tasks' })
+        }}
         />
       )
     } else if (!active) {
@@ -61,6 +72,9 @@ const Home = () => {
         message="
         To make use of Moar and start tracking the time
         go to your tasks and start one, time to work!"
+        onClick={() => {
+          dispatch({ type: 'SET_ACTIVE_TAB', payload: '/tasks' })
+        }}
         />
       )
     } else {

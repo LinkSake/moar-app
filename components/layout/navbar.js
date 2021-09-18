@@ -24,8 +24,8 @@ const Navbar = () => {
       <Link href='/'>
         <Menu.Item 
         link 
-        active={state.active === 'home'}
-        onClick={() => {handleItemClick('home')}}
+        active={state.active === '/'}
+        onClick={() => {handleItemClick('/')}}
         >
           <Icon name='home'/>
         </Menu.Item>
@@ -34,8 +34,8 @@ const Navbar = () => {
         <Link href='/tasks'>
           <Menu.Item 
           link
-          active={state.active === 'tasks'}
-          onClick={() => {handleItemClick('tasks')}}
+          active={state.active === '/tasks'}
+          onClick={() => {handleItemClick('/tasks')}}
           >
             <Icon name='tasks'/>
             Tasks
@@ -44,8 +44,8 @@ const Navbar = () => {
         <Link href='/projects'>
           <Menu.Item 
           link
-          active={state.active === 'projects'}
-          onClick={() => {handleItemClick('projects')}}
+          active={state.active === '/projects'}
+          onClick={() => {handleItemClick('/projects')}}
           >
             <Icon name='book'/>
             Projects

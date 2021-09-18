@@ -1,8 +1,12 @@
 import Head from 'next/head'
+import { useContext } from 'react'
+import { Context } from '../../context'
 import Note from '../../components/note'
 import { Grid, Header } from 'semantic-ui-react'
  
 const Tasks = () => {
+
+  const { dispatch } = useContext(Context)
 
   const head = () => (
     <Head>
@@ -22,7 +26,11 @@ const Tasks = () => {
           You can't track your task without a project; 
           after creating a project here will appear the 
           task you're currently working on.
-        "/>
+        "
+        onClick={() => {
+          dispatch({ type: 'SET_ACTIVE_TAB', payload: '/projects' })
+        }}
+        />
       )
     } else { 
       return projects.map(project => {
