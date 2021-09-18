@@ -15,9 +15,9 @@ const Tasks = () => {
       return (
         <Note
         color='purple'
-        button='Create a project'
+        link='Create a project'
         title="😱 You haven't created a project yet!"
-        onClick={() => { alert('Create project modal') }}
+        route='/projects'
         message="
           You can't track your task without a project; 
           after creating a project here will appear the 

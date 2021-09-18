@@ -10,8 +10,8 @@ const Projects = () => {
     </Head>
   )
 
-  const isProjectEmpty = project => {
-    if (project) {
+  const isProjectEmpty = projects => {
+    if (projects.length === 0) {
       return (
         <Note
         color='purple'
@@ -43,7 +43,7 @@ const Projects = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            { isProjectEmpty(true) }
+            { isProjectEmpty([]) }
           </Grid.Column>
         </Grid.Row>
       </Grid>
