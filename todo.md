@@ -5,6 +5,6 @@
   - [x] Landing
   - [x] Tasks
   - [x] Projects
-- [] Add a context wrapper to manage global state.
-  - [] Add global state for navbar active tab.
+- [x] Add a context wrapper to manage global state.
+  - [x] Add global state for navbar active tab.
 - [] Create modal for create/edit/delete task/project.
