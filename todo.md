@@ -14,7 +14,7 @@
   - [x] Each project should have total time and total tasks
   - [x] Each project should be a link to the task header that it represents
   - [x] Each project have a Edit/Delete button
-  - [] Delete method should ask if sure with alert
+  - [x] Delete method should ask if sure with alert
   - [x] Create project button
 - [] Finish task page.
   - [] List tasks per project
@@ -23,4 +23,5 @@
   - [] Each task have a Edit/Delete button
   - [] Delete method should ask if sure with alert
   - [] Create task button
+- [] Add state updates with new/edit/delete items
 - [] Add timer to home with current task.
