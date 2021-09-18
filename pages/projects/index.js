@@ -1,13 +1,65 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import Note from '../../components/note'
 import { Grid, Header } from 'semantic-ui-react'
+import ModalForm from '../../components/modal_form'
  
 const Projects = () => {
+
+  const [project, setProject] = useState({})
+  const [newModal, setNewModal] = useState(false)
+  const [editModal, setEditModal] = useState(false)
+
+  const handleNewProject = () => {
+    alert( project.name + ' created!')
+    setNewModal(false)
+    setProject({})
+  }
+
+  const handleEditProject = () => {
+    alert('Project '+project.name+' updated!')
+    setEditModal(false)
+    setProject({})
+  }
+
+  const handleDeleteProject = () => {
+    alert('Project '+project.name+' deleted!')
+    setEditModal(false)
+    setProject({})
+  }
+
 
   const head = () => (
     <Head>
       <title>Moar! - Projects</title>
     </Head>
+  )
+
+  const newProject = () => (
+    <ModalForm
+    item={project}
+    open={newModal}
+    title='New Project'
+    setItem={setProject} 
+    confirmLabel='Confrim'
+    onClose={() => { setNewModal(false) }} 
+    onConfirm={() => { handleNewProject() }}
+    />
+  )
+
+  // Edit project should be called `() => { setProject({name: 'Snow', items: []}); setEditModal(true) }`
+  const editProject = () => (
+    <ModalForm
+    item={project}
+    open={editModal}
+    setItem={setProject}
+    title='Edit Project'
+    deleteLabel='Delete'
+    confirmLabel='Update'
+    onClose={() => { setEditModal(false) }} 
+    onConfirm={() => { handleEditProject() }} 
+    onDelete={() => { handleDeleteProject() }} 
+    />
   )
 
   const isProjectEmpty = projects => {
@@ -16,7 +68,7 @@ const Projects = () => {
         <Note
         color='purple'
         button='Create a project'
-        onClick={() => { alert('Create project modal') }}
+        onClick={() => { setNewModal(true) }}
         title="😱 You haven't created a project yet!"
         message="
           You can't track your task without a project; 
@@ -25,6 +77,7 @@ const Projects = () => {
         "/>
       )
     } else {
+      // List projects
       return null
     }
   }
@@ -33,6 +86,7 @@ const Projects = () => {
   return (
     <>
       { head() }
+      { newProject() }
       <Grid> 
         <Grid.Row>
           <Grid.Column width={16}>

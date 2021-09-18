@@ -5,7 +5,6 @@ import { useReducer, createContext } from 'react'
 
 const getInitialState = () => {
   const { asPath } = useRouter()
-  console.log(asPath)
 
   return ({
     active: asPath,
