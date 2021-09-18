@@ -16,15 +16,16 @@ const Projects = () => {
     setProject({})
   }
 
-  const handleEditProject = ( oldProject ) => {
-    setProject(oldProject)
-    alert('Project '+project.name+' updated')
+  const handleEditProject = () => {
+    alert('Project '+project.name+' updated!')
     setEditModal(false)
+    setProject({})
   }
 
   const handleDeleteProject = () => {
-    alert('Project '+project.name+' deleted')
+    alert('Project '+project.name+' deleted!')
     setEditModal(false)
+    setProject({})
   }
 
 
@@ -46,16 +47,18 @@ const Projects = () => {
     />
   )
 
-  const editProject = project => (
+  // Edit project should be called `() => { setProject({name: 'Snow', items: []}); setEditModal(true) }`
+  const editProject = () => (
     <ModalForm
     item={project}
     open={editModal}
+    setItem={setProject}
     title='Edit Project'
     deleteLabel='Delete'
     confirmLabel='Update'
     onClose={() => { setEditModal(false) }} 
-    onConfirm={() => { handleEditProject(project) }} 
-    onDelete={() => { handleDeleteProject(project) }} 
+    onConfirm={() => { handleEditProject() }} 
+    onDelete={() => { handleDeleteProject() }} 
     />
   )
 
