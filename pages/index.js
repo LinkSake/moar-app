@@ -25,14 +25,13 @@ const Home = () => {
     </div>
   )
 
-  const isMoarEmpty = (project, task) => {
-    if (project) {
+  const getTimer = (projects, active) => {
+    if (projects.length === 0) {
       return (
         <Note
         color='purple'
         route='/projects'
         link='Create a project'
-        className={Styles.empty}
         title="😱 You haven't created a project yet!"
         message="
           You can't track your task without a project; 
@@ -40,13 +39,24 @@ const Home = () => {
           task you're currently working on.
         "/>
       )
-    } else if (task) {
+    } else if (projects[0].items.length === 0) {
+      return (
+        <Note
+        color='purple'
+        link='Create a task'
+        title="😅 There aren't tasks on your project."
+        route='/tasks'
+        message="
+        To make use of Moar and start tracking time,
+        create a task!"
+        />
+      )
+    } else if (!active) {
       return (
         <Note
         color='purple'
         route='/tasks'
         link='Start a task'
-        className={Styles.empty}
         title="😴 You haven't started a task."
         message="
         To make use of Moar and start tracking the time
@@ -54,6 +64,7 @@ const Home = () => {
         />
       )
     } else {
+      // Timer thingy
       return null
     }
   }
@@ -70,7 +81,7 @@ const Home = () => {
         <Grid.Row centered>
           <Grid.Column width={12} >
             <br/>
-            { isMoarEmpty(true, true) }
+            { getTimer([], false) }
           </Grid.Column>
         </Grid.Row>
       </Grid>
