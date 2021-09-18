@@ -1,10 +1,13 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { Context } from '../../context'
 import Note from '../../components/note'
+import { useContext, useState } from 'react'
 import { Grid, Header } from 'semantic-ui-react'
 import ModalForm from '../../components/modal_form'
  
 const Projects = () => {
+
+  const { state, dispatch } = useContext(Context)
 
   const [project, setProject] = useState({})
   const [newModal, setNewModal] = useState(false)
@@ -78,7 +81,9 @@ const Projects = () => {
       )
     } else {
       // List projects
-      return null
+      return projects.map(project => (
+        <li> {project.name} </li>
+      ))
     }
   }
 
@@ -97,7 +102,7 @@ const Projects = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            { isProjectEmpty([]) }
+            { isProjectEmpty(state.projects) }
           </Grid.Column>
         </Grid.Row>
       </Grid>

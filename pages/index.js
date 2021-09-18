@@ -7,7 +7,7 @@ import { Grid, Header, Icon } from 'semantic-ui-react'
  
 const Home = () => {
 
-  const { dispatch } = useContext(Context)
+  const { state, dispatch } = useContext(Context)
 
   const head = () => (
     <Head>
@@ -29,7 +29,7 @@ const Home = () => {
     </div>
   )
 
-  const getTimer = (projects, active) => {
+  const getTimer = (projects, working) => {
     if (projects.length === 0) {
       return (
         <Note
@@ -62,7 +62,7 @@ const Home = () => {
         }}
         />
       )
-    } else if (!active) {
+    } else if ( Object.keys(working).length === 0 ) {
       return (
         <Note
         color='purple'
@@ -95,7 +95,7 @@ const Home = () => {
         <Grid.Row centered>
           <Grid.Column width={12} >
             <br/>
-            { getTimer([], false) }
+            { getTimer(state.projects, state.working) }
           </Grid.Column>
         </Grid.Row>
       </Grid>

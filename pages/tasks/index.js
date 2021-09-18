@@ -6,7 +6,7 @@ import { Grid, Header } from 'semantic-ui-react'
  
 const Tasks = () => {
 
-  const { dispatch } = useContext(Context)
+  const { state, dispatch } = useContext(Context)
 
   const head = () => (
     <Head>
@@ -88,7 +88,7 @@ const Tasks = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            { getProjects([]) }
+            { getProjects(state.projects) }
           </Grid.Column>
         </Grid.Row>
       </Grid>
