@@ -1,13 +1,51 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import Note from '../../components/note'
-import { Grid, Header } from 'semantic-ui-react'
+import Form from '../../components/form'
+import { Grid, Header, Modal, Button } from 'semantic-ui-react'
  
 const Projects = () => {
+
+  const [open, setOpen] = useState(false)
 
   const head = () => (
     <Head>
       <title>Moar! - Projects</title>
     </Head>
+  )
+
+  const newForm = () => (
+    <Modal
+    closeIcon
+    open={open}
+    onClose={() => { setOpen(!open) }} 
+    >
+      <Modal.Header>
+        New Project
+      </Modal.Header>
+      <Modal.Content>
+        <Modal.Description>
+          {/* Form */}
+          <p>
+            Foo foo!
+          </p>
+        </Modal.Description>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button
+        color='red'
+        onClick={() => { setOpen(!open) }} 
+        >
+          Delete project
+        </Button>
+        <Button
+        color='purple'
+        onClick={() => { setOpen(!open) }} 
+        >
+          Create project
+        </Button>
+      </Modal.Actions>
+    </Modal>
   )
 
   const isProjectEmpty = projects => {
@@ -16,7 +54,7 @@ const Projects = () => {
         <Note
         color='purple'
         button='Create a project'
-        onClick={() => { alert('Create project modal') }}
+        onClick={() => { setOpen(!open) }}
         title="😱 You haven't created a project yet!"
         message="
           You can't track your task without a project; 
@@ -33,6 +71,7 @@ const Projects = () => {
   return (
     <>
       { head() }
+      { newForm() }
       <Grid> 
         <Grid.Row>
           <Grid.Column width={16}>
