@@ -9,30 +9,30 @@ const Projects = () => {
 
   const { state, dispatch } = useContext(Context)
 
-  const [project, setProject] = useState({})
   const [newModal, setNewModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
+  const [currentProject, setCurrentProject] = useState({})
 
   const handleNewProject = () => {
-    alert( project.name + ' created!')
+    alert( currentProject.name + ' created!')
     setNewModal(false)
-    setProject({})
+    setCurrentProject({})
   }
 
   const handleEditProject = () => {
-    alert('Project '+project.name+' updated!')
+    alert('Project ' + currentProject.name + ' updated!')
     setEditModal(false)
-    setProject({})
+    setCurrentProject({})
   }
 
   const handleDeleteProject = () => {
     if ( confirm('Are you sure you want to delete this project?') ) {
       // Temporary, this should delete the project
       setEditModal(false)
-      setProject({})
+      setCurrentProject({})
     } else {
       setEditModal(false)
-      setProject({})
+      setCurrentProject({})
     }
   }
 
@@ -45,11 +45,11 @@ const Projects = () => {
 
   const newProject = () => (
     <ModalForm
-    item={project}
     open={newModal}
     title='New Project'
-    setItem={setProject} 
+    item={currentProject}
     confirmLabel='Confrim'
+    setItem={setCurrentProject} 
     onClose={() => { setNewModal(false) }} 
     onConfirm={() => { handleNewProject() }}
     />
@@ -57,12 +57,12 @@ const Projects = () => {
 
   const editProject = () => (
     <ModalForm
-    item={project}
     open={editModal}
-    setItem={setProject}
     title='Edit Project'
     deleteLabel='Delete'
     confirmLabel='Update'
+    item={currentProject}
+    setItem={setCurrentProject}
     onClose={() => { setEditModal(false) }} 
     onConfirm={() => { handleEditProject() }} 
     onDelete={() => { handleDeleteProject() }} 
@@ -83,7 +83,7 @@ const Projects = () => {
               <List.Header 
               as='a'
               id={project.id}
-              onClick={() => { setProject(project); setEditModal(true)}}
+              onClick={() => { setCurrentProject(project); setEditModal(true)}}
               style={{color: '#a333c8 !important' , textDecoration: 'underline'}}
               >
                 { project.name }
