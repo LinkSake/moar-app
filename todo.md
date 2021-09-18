@@ -8,7 +8,7 @@
 - [x] Add a context wrapper to manage global state.
   - [x] Add global state for navbar active tab.
 - [x] Create modal for create/edit/delete task/project.
-- [] Create context state with mock data.
+- [x] Create context state with mock data.
 - [] Finish project page.
   - [] List projects
   - [] Each project should have total time and total tasks
