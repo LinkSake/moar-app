@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router'
 import { active } from './reducers/active'
+import { working } from './reducers/working'
+import { projects } from './reducers/projects'
 import { useReducer, createContext } from 'react'
 
 
@@ -8,6 +10,8 @@ const getInitialState = () => {
 
   return ({
     active: asPath,
+    working: {},
+    projects: [{name: 'Lola', items: [{name: 'Yum'}]}, {name: 'Maya', items: [] }],
   })
 }
 
@@ -22,7 +26,11 @@ const combineReducers = (...reducers) => (state, action) => {
 
 const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(
-    combineReducers(active), getInitialState()
+    combineReducers(
+      active, 
+      working, 
+      projects
+    ), getInitialState()
   )
   const value = { state, dispatch }
 
