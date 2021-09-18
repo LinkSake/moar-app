@@ -11,7 +11,10 @@ const getInitialState = () => {
   return ({
     active: asPath,
     working: {},
-    projects: [{name: 'Lola', items: [{name: 'Yum'}]}, {name: 'Maya', items: [] }],
+    projects: [
+      {id: 1, name: 'Lola', items: [{ id:1, name: 'Yum'}], count: 1, elapsed:0 }, 
+      {id: 2, name: 'Maya', items: [], count: 0, elapsed:0 }
+    ],
   })
 }
 
