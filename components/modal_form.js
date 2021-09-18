@@ -1,6 +1,6 @@
 import { Button, Form, Modal } from 'semantic-ui-react'
 
-const ModalForm = ({ confirmLabel, deleteLabel, open, onClose, onConfirm, onDelete, title }) => (
+const ModalForm = ({ confirmLabel, deleteLabel, item, open, onClose, onConfirm, onDelete, setItem, title }) => (
   <Modal
   closeIcon
   open={ open }
@@ -11,24 +11,23 @@ const ModalForm = ({ confirmLabel, deleteLabel, open, onClose, onConfirm, onDele
     </Modal.Header>
     <Modal.Content>
       <Modal.Description>
-        <Form>
+        <Form onSubmit={ onConfirm }>
           <Form.Field>
             <label>Name</label>
-            <input placeholder='Your new billion dollar idea' />
+            <input 
+            placeholder='Your new billion dollar idea' 
+            value={item.name !== undefined ? item.name : ''}
+            onChange={ (e) => setItem({ ...item, name: e.target.value }) }
+            />
           </Form.Field>
-          <Button
-          type='submit'
-          color='purple'
-          floated='right'
-          onClick={ onConfirm } 
-          >
+          <Form.Button color='purple' floated='right'>
             { confirmLabel }
-          </Button>
+          </Form.Button>
           { deleteLabel !== undefined || onDelete !== undefined ? (
             <Button
             color='red'
-            onClick={onDelete} 
             floated='right'
+            onClick={onDelete} 
             >
               { deleteLabel }
             </Button>

@@ -6,7 +6,27 @@ import ModalForm from '../../components/modal_form'
  
 const Projects = () => {
 
-  const [open, setOpen] = useState(false)
+  const [project, setProject] = useState({})
+  const [newModal, setNewModal] = useState(false)
+  const [editModal, setEditModal] = useState(false)
+
+  const handleNewProject = () => {
+    alert( project.name + ' created!')
+    setNewModal(false)
+    setProject({})
+  }
+
+  const handleEditProject = ( oldProject ) => {
+    setProject(oldProject)
+    alert('Project '+project.name+' updated')
+    setEditModal(false)
+  }
+
+  const handleDeleteProject = () => {
+    alert('Project '+project.name+' deleted')
+    setEditModal(false)
+  }
+
 
   const head = () => (
     <Head>
@@ -16,13 +36,26 @@ const Projects = () => {
 
   const newProject = () => (
     <ModalForm
-    open={open}
+    item={project}
+    open={newModal}
     title='New Project'
-    deleteLabel='Delete'
+    setItem={setProject} 
     confirmLabel='Confrim'
-    onClose={() => { setOpen(!open) }} 
-    onDelete={() => { setOpen(!open) }} 
-    onConfirm={() => { setOpen(!open) }} 
+    onClose={() => { setNewModal(false) }} 
+    onConfirm={() => { handleNewProject() }}
+    />
+  )
+
+  const editProject = project => (
+    <ModalForm
+    item={project}
+    open={editModal}
+    title='Edit Project'
+    deleteLabel='Delete'
+    confirmLabel='Update'
+    onClose={() => { setEditModal(false) }} 
+    onConfirm={() => { handleEditProject(project) }} 
+    onDelete={() => { handleDeleteProject(project) }} 
     />
   )
 
@@ -32,7 +65,7 @@ const Projects = () => {
         <Note
         color='purple'
         button='Create a project'
-        onClick={() => { setOpen(!open) }}
+        onClick={() => { setNewModal(true) }}
         title="😱 You haven't created a project yet!"
         message="
           You can't track your task without a project; 
@@ -41,6 +74,7 @@ const Projects = () => {
         "/>
       )
     } else {
+      // List projects
       return null
     }
   }
