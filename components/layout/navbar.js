@@ -1,13 +1,19 @@
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { Context } from '../../context'
 import { Icon, Menu } from 'semantic-ui-react'
 
 const Navbar = () => {
 
-  const [active, setActive] = useState('home')
+  const { state, dispatch } = useContext(Context)
 
-  const handleItemClick = (name) => setActive(name)
+  const handleItemClick = (name) => {
+    dispatch({ 
+      type: 'SET_ACTIVE_TAB', 
+      payload: name 
+    })
+  }
 
   return (
     <Menu 
@@ -18,8 +24,8 @@ const Navbar = () => {
       <Link href='/'>
         <Menu.Item 
         link 
-        active={active === 'home'}
-        onClick={() => {handleItemClick('home')}}
+        active={state.active === '/'}
+        onClick={() => {handleItemClick('/')}}
         >
           <Icon name='home'/>
         </Menu.Item>
@@ -28,8 +34,8 @@ const Navbar = () => {
         <Link href='/tasks'>
           <Menu.Item 
           link
-          active={active === 'tasks'}
-          onClick={() => {handleItemClick('tasks')}}
+          active={state.active === '/tasks'}
+          onClick={() => {handleItemClick('/tasks')}}
           >
             <Icon name='tasks'/>
             Tasks
@@ -38,8 +44,8 @@ const Navbar = () => {
         <Link href='/projects'>
           <Menu.Item 
           link
-          active={active === 'projects'}
-          onClick={() => {handleItemClick('projects')}}
+          active={state.active === '/projects'}
+          onClick={() => {handleItemClick('/projects')}}
           >
             <Icon name='book'/>
             Projects

@@ -25,6 +25,7 @@ const Note = ({ button, color, message, link, onClick, route, title }) => (
           <Button 
           fluid 
           color={color}
+          onClick={ onClick }
           >
             { link }
           </Button>
