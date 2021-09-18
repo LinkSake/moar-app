@@ -9,13 +9,13 @@
   - [x] Add global state for navbar active tab.
 - [x] Create modal for create/edit/delete task/project.
 - [x] Create context state with mock data.
-- [] Finish project page.
-  - [] List projects
-  - [] Each project should have total time and total tasks
-  - [] Each project should be a link to the task header that it represents
-  - [] Each project have a Edit/Delete button
+- [x] Finish project page.
+  - [x] List projects
+  - [x] Each project should have total time and total tasks
+  - [x] Each project should be a link to the task header that it represents
+  - [x] Each project have a Edit/Delete button
   - [] Delete method should ask if sure with alert
-  - [] Create project button
+  - [x] Create project button
 - [] Finish task page.
   - [] List tasks per project
   - [] Each task should display time elapsed
