@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { Context } from '../../context'
 import Note from '../../components/note'
 import { useContext, useState } from 'react'
-import { Grid, Header } from 'semantic-ui-react'
 import ModalForm from '../../components/modal_form'
+import { Button, Grid, Header, List } from 'semantic-ui-react'
  
 const Projects = () => {
 
@@ -50,7 +50,6 @@ const Projects = () => {
     />
   )
 
-  // Edit project should be called `() => { setProject({name: 'Snow', items: []}); setEditModal(true) }`
   const editProject = () => (
     <ModalForm
     item={project}
@@ -63,6 +62,44 @@ const Projects = () => {
     onConfirm={() => { handleEditProject() }} 
     onDelete={() => { handleDeleteProject() }} 
     />
+  )
+
+  const projectsList = ( projects ) => (
+    <>
+      <List animated divided relaxed>
+        { projects.map(project => (
+          <List.Item key={project.id}>
+            <List.Icon 
+            name='book' 
+            size='large' 
+            verticalAlign='middle'
+            />
+            <List.Content>
+              <List.Header 
+              as='a'
+              id={project.id}
+              onClick={() => { setProject(project); setEditModal(true)}}
+              style={{color: '#a333c8 !important' , textDecoration: 'underline'}}
+              >
+                { project.name }
+              </List.Header>
+              <List.Description>
+                Tasks in this project: { project.count } 
+                {' | '} 
+                Total time elapsed: { project.elapsed }
+              </List.Description>
+            </List.Content>
+          </List.Item>  
+        ))}
+      </List>
+      <Button 
+      basic 
+      color='purple' 
+      floated='right'
+      content='+ New project' 
+      onClick={() => { setNewModal(true) }}
+      />
+    </>
   )
 
   const isProjectEmpty = projects => {
@@ -80,10 +117,7 @@ const Projects = () => {
         "/>
       )
     } else {
-      // List projects
-      return projects.map(project => (
-        <li> {project.name} </li>
-      ))
+      return projectsList(projects)
     }
   }
 
@@ -92,6 +126,7 @@ const Projects = () => {
     <>
       { head() }
       { newProject() }
+      { editProject() }
       <Grid> 
         <Grid.Row>
           <Grid.Column width={16}>
