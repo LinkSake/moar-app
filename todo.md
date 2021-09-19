@@ -25,5 +25,5 @@
   - [x] Each task have a Edit/Delete button
   - [x] Delete method should ask if sure with alert
   - [x] Create task button
-- [] Add state updates with new/edit/delete items
+- [x] Add state updates with new/edit/delete items
 - [] Add timer to home with current task.
