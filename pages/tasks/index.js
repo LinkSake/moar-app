@@ -2,9 +2,10 @@ import Head from 'next/head'
 import { Context } from '../../context'
 import Note from '../../components/note'
 import { useContext, useState } from 'react'
+import { getDifference } from '../../utils/dates'
 import ModalForm from '../../components/modal_form'
-import { Button, Grid, Header, Table } from 'semantic-ui-react'
 import { working } from '../../context/reducers/working'
+import { Button, Grid, Header, Table } from 'semantic-ui-react'
   
 const Tasks = () => {
 
@@ -134,7 +135,9 @@ const Tasks = () => {
                   <Table.Cell>
                     { task.running ? (
                       <i>Currently working on this task...</i>
-                    ) : task.elapsed }
+                    ) : (
+                      getDifference(task.start, task.end)
+                    ) }
                   </Table.Cell>
                   <Table.Cell collapsing>
                     <Button
