@@ -9,30 +9,46 @@ const Projects = () => {
 
   const { state, dispatch } = useContext(Context)
 
-  const [project, setProject] = useState({})
+  const [currentProject, setCurrentProject] = useState({})
   const [newModal, setNewModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
 
   const handleNewProject = () => {
-    alert( project.name + ' created!')
+    let mockProject = {
+      id: state.projects.length + 1,
+      name: currentProject.name,
+      items: [],
+      count: 0,
+      elapsed: 0
+    }
+    dispatch({ type: 'SET_PROJECTS', payload: [...state.projects, mockProject] })
+
     setNewModal(false)
-    setProject({})
+    setCurrentProject({})
   }
 
   const handleEditProject = () => {
-    alert('Project '+project.name+' updated!')
+    let objectIndex = state.projects.findIndex(project => project.id === currentProject.id)
+    let newProjects = [...state.projects]
+    newProjects[objectIndex] = currentProject
+    dispatch({ type: 'SET_PROJECTS', payload: newProjects })
+
     setEditModal(false)
-    setProject({})
+    setCurrentProject({})
   }
 
   const handleDeleteProject = () => {
     if ( confirm('Are you sure you want to delete this project?') ) {
-      // Temporary, this should delete the project
+
+      let newProjects = state.projects.filter(project => project.id !== currentProject.id)
+      dispatch({ type: 'SET_PROJECTS', payload: newProjects })
+
       setEditModal(false)
-      setProject({})
+      setCurrentProject({})
+
     } else {
       setEditModal(false)
-      setProject({})
+      setCurrentProject({})
     }
   }
 
@@ -45,11 +61,11 @@ const Projects = () => {
 
   const newProject = () => (
     <ModalForm
-    item={project}
     open={newModal}
     title='New Project'
-    setItem={setProject} 
+    item={currentProject}
     confirmLabel='Confrim'
+    setItem={setCurrentProject} 
     onClose={() => { setNewModal(false) }} 
     onConfirm={() => { handleNewProject() }}
     />
@@ -57,12 +73,12 @@ const Projects = () => {
 
   const editProject = () => (
     <ModalForm
-    item={project}
     open={editModal}
-    setItem={setProject}
     title='Edit Project'
     deleteLabel='Delete'
     confirmLabel='Update'
+    item={currentProject}
+    setItem={setCurrentProject}
     onClose={() => { setEditModal(false) }} 
     onConfirm={() => { handleEditProject() }} 
     onDelete={() => { handleDeleteProject() }} 
@@ -83,7 +99,7 @@ const Projects = () => {
               <List.Header 
               as='a'
               id={project.id}
-              onClick={() => { setProject(project); setEditModal(true)}}
+              onClick={() => { setCurrentProject(project); setEditModal(true)}}
               style={{color: '#a333c8 !important' , textDecoration: 'underline'}}
               >
                 { project.name }
