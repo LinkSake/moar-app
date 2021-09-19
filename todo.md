@@ -16,12 +16,12 @@
   - [x] Each project have a Edit/Delete button
   - [x] Delete method should ask if sure with alert
   - [x] Create project button
-- [] Finish task page.
+- [x] Finish task page.
   - [x] List tasks per project
-  - [] Each task should display time elapsed
-    - [] Add libraries to interpret time
-  - [] Each task should have a start button
-    - [] Make sure that that when theres a working task all other start buttons are disabled
+  - [x] Each task should display time elapsed
+    - [x] Add libraries to interpret time
+  - [x] Each task should have a start button
+    - [x] Make sure that that when theres a working task all other start buttons are disabled
   - [x] Each task have a Edit/Delete button
   - [x] Delete method should ask if sure with alert
   - [x] Create task button
