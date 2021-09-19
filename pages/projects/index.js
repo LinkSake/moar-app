@@ -4,7 +4,7 @@ import Note from '../../components/note'
 import { useContext, useState } from 'react'
 import ModalForm from '../../components/modal_form'
 import { updateProjects } from '../../utils/context'
-import { getDurationMinutes } from '../../utils/dates'
+import { getElasedTimeFromProject } from '../../utils/dates'
 import { Button, Grid, Header, List } from 'semantic-ui-react'
  
 const Projects = () => {
@@ -103,9 +103,9 @@ const Projects = () => {
                 { project.name }
               </List.Header>
               <List.Description>
-                Tasks in this project: { project.count } 
+                Tasks in this project: { project.items.length } 
                 {' | '} 
-                Total time elapsed: { getDurationMinutes(project.elapsed) }
+                Total time elapsed: { getElasedTimeFromProject(project) }
               </List.Description>
             </List.Content>
           </List.Item>  
