@@ -10,13 +10,13 @@ const getInitialState = () => {
 
   return ({
     active: asPath,
-    working: { id: 1, name: 'Jugar', running: true, start: '2021-09-19 20:00:00', end: '2021-09-19 22:23:00'},
+    working: { id: 1, name: 'Study', running: true, start: '2021-09-19 21:00:00', end: ''},
     projects: [
-      { id: 1, name: 'Lola', items: [
-        { id: 0, name: 'Comer', running: false, start: '2021-09-19 13:00:00', end: '2021-09-19 13:23:00'}, 
-        { id: 1, name: 'Jugar', running: true, start: '2021-09-19 21:00:00', end: '2021-09-19 22:23:00'}
-      ], count: 2, elapsed: 109 }, 
-      { id: 2, name: 'Maya', items: [], count: 0, elapsed:0 }
+      { id: 1, name: 'School', items: [
+        { id: 0, name: 'Homework', running: false, start: '2021-09-19 13:00:00', end: '2021-09-19 13:23:00'}, 
+        { id: 1, name: 'Study', running: true, start: '2021-09-19 21:00:00', end: ''}
+      ]}, 
+      { id: 2, name: 'House', items: []}
     ],
   })
 }
