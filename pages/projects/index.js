@@ -3,6 +3,7 @@ import { Context } from '../../context'
 import Note from '../../components/note'
 import { useContext, useState } from 'react'
 import ModalForm from '../../components/modal_form'
+import { updateProjects } from '../../utils/context'
 import { getDurationMinutes } from '../../utils/dates'
 import { Button, Grid, Header, List } from 'semantic-ui-react'
  
@@ -29,10 +30,7 @@ const Projects = () => {
   }
 
   const handleEditProject = () => {
-    let objectIndex = state.projects.findIndex(project => project.id === currentProject.id)
-    let newProjects = [...state.projects]
-    newProjects[objectIndex] = currentProject
-    dispatch({ type: 'SET_PROJECTS', payload: newProjects })
+    updateProjects(state, dispatch, currentProject)
 
     setEditModal(false)
     setCurrentProject({})

@@ -4,7 +4,7 @@ import Note from '../../components/note'
 import { useContext, useState } from 'react'
 import { getDifference } from '../../utils/dates'
 import ModalForm from '../../components/modal_form'
-import { working } from '../../context/reducers/working'
+import { updateProjects } from '../../utils/context'
 import { Button, Grid, Header, Table } from 'semantic-ui-react'
   
 const Tasks = () => {
@@ -14,22 +14,52 @@ const Tasks = () => {
   const [newModal, setNewModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [currentTask, setCurrentTask] = useState({})
+  const [currentProject, setCurrentProject] = useState({})
 
   const handleNewTask = () => {
-    alert( currentTask.name + ' created!')
+    let mockTask = {
+      id: currentProject.items.length + 1,
+      name: currentTask.name,
+      running: false,
+      start: '',
+      end: ''
+    }
+
+    let oldTasks = currentProject.items
+    let newTasks = [...oldTasks, mockTask]
+
+    let newProject = { ...currentProject, items: newTasks }
+    updateProjects(state, dispatch, newProject)
+    
     setNewModal(false)
     setCurrentTask({})
   }
 
   const handleEditTask = () => {
-    alert('Task ' + currentTask.name + ' updated!')
+    let oldTasks = currentProject.items
+    let newTasks = oldTasks.map(task => {
+      if (task.id === currentTask.id) {
+        return currentTask
+      } else {
+        return task
+      }
+    })
+
+    let newProject = { ...currentProject, items: newTasks }
+    updateProjects(state, dispatch, newProject)
+
     setEditModal(false)
     setCurrentTask({})
   }
 
   const handleDeleteTask = () => {
     if ( confirm('Are you sure you want to delete this task?') ) {
-      // Temporary, this should delete the project
+      let oldTasks = currentProject.items
+      let newTasks = oldTasks.filter(task => task.id !== currentTask.id)
+
+      let newProject = { ...currentProject, items: newTasks }
+      updateProjects(state, dispatch, newProject)
+
       setEditModal(false)
       setCurrentTask({})
     } else {
@@ -98,14 +128,17 @@ const Tasks = () => {
   const getTasksComponents = (project) => {
     if (project.items.length === 0) {
       return (
-        <div key={project.name}>
+        <div key={project.id}>
           <Header as='h2'>
             {project.name}
           </Header>
             <Note
             color='purple'
             button='Create a task'
-            onClick={() => { setNewModal(true) }}
+            onClick={() => {
+              setCurrentProject(project) 
+              setNewModal(true) 
+            }}
             title="😅 There aren't tasks on this project."
             message="
             To make use of Moar and start tracking time,
@@ -115,8 +148,8 @@ const Tasks = () => {
       )
     } else {
       return (
-        <>
-          <Header key={project.name} as='h2'>
+        <div key={project.id}>
+          <Header as='h2'>
             { project.name }
           </Header>
           <Table basic unstackable>
@@ -130,7 +163,7 @@ const Tasks = () => {
             </Table.Header>
             <Table.Body>
               {project.items.map(task => (
-                <Table.Row key={task.name}>
+                <Table.Row key={task.id}>
                   <Table.Cell>{task.name}</Table.Cell>
                   <Table.Cell>
                     { task.running ? (
@@ -143,7 +176,11 @@ const Tasks = () => {
                     <Button
                     color='purple'
                     disabled={task.running ? true : false}
-                    onClick={() => { setCurrentTask(task); setEditModal(true) }}
+                    onClick={() => { 
+                      setCurrentProject(project)
+                      setCurrentTask(task)
+                      setEditModal(true) 
+                    }}
                     >
                       Edit/Delete
                     </Button>
@@ -177,11 +214,11 @@ const Tasks = () => {
           color='purple' 
           floated='right'
           content='+ Add task' 
-          onClick={() => { setNewModal(true) }}
+          onClick={() => { setCurrentProject(project); setNewModal(true) }}
           />
           <br/>
           <br/>
-        </>
+        </div>
       )
     }
   }

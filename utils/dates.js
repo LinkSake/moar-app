@@ -12,7 +12,11 @@ const getDifference = ( start, end ) => {
   let endDate = dayjs(end, 'YYYY-MM-DD hh:mm:ss')
   let diff = endDate.diff(startDate, 'minutes')  
 
-  return dayjs.duration(diff, 'minutes').humanize()
+  if (isNaN(diff)) {
+    return '0 minutes'
+  } else {
+    return dayjs.duration(diff, 'minutes').humanize()
+  }
 }
 
 const getDurationMinutes = ( minutes ) => {
