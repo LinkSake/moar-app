@@ -1,0 +1,30 @@
+# TO-DO
+
+- [x] Create a GitHub repo and push to it.
+- [x] Create empty state for the 3 main screens.
+  - [x] Landing
+  - [x] Tasks
+  - [x] Projects
+- [x] Add a context wrapper to manage global state.
+  - [x] Add global state for navbar active tab.
+- [x] Create modal for create/edit/delete task/project.
+- [x] Create context state with mock data.
+- [x] Finish project page.
+  - [x] List projects
+  - [x] Each project should have total time and total tasks
+  - [x] Each project should be a link to the task header that it represents
+  - [x] Each project have a Edit/Delete button
+  - [x] Delete method should ask if sure with alert
+  - [x] Create project button
+- [x] Finish task page.
+  - [x] List tasks per project
+  - [x] Each task should display time elapsed
+    - [x] Add libraries to interpret time
+  - [x] Each task should have a start button
+    - [x] Make sure that that when theres a working task all other start buttons are disabled
+  - [x] Each task have a Edit/Delete button
+  - [x] Delete method should ask if sure with alert
+  - [x] Create task button
+- [x] Add state updates with new/edit/delete items
+- [] Make Start/Stop a task
+- [] Add timer to home with current task.

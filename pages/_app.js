@@ -1,14 +1,15 @@
 import '../styles/globals.css'
+import { Provider } from '../context'
 import 'semantic-ui-css/semantic.min.css'
-
-import Navbar from '../components/layout/navbar'
+import Layout from '../components/layout/layout'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Navbar />
-      <Component {...pageProps} />
-    </>
+    <Provider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
   )
 }
 
