@@ -4,7 +4,8 @@ import Note from '../../components/note'
 import { useContext, useState } from 'react'
 import ModalForm from '../../components/modal_form'
 import { Button, Grid, Header, Table } from 'semantic-ui-react'
- 
+import { working } from '../../context/reducers/working'
+  
 const Tasks = () => {
 
   const { state, dispatch } = useContext(Context)
@@ -157,6 +158,7 @@ const Tasks = () => {
                       <Button
                       basic
                       color='purple'
+                      disabled={state.working === {} ? false : true}
                       onClick={() => { alert('Task started') }}
                       >
                         Start
