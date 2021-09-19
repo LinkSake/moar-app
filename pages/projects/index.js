@@ -3,7 +3,8 @@ import { Context } from '../../context'
 import Note from '../../components/note'
 import { useContext, useState } from 'react'
 import ModalForm from '../../components/modal_form'
-import { getDurationMinutes } from '../../utils/dates'
+import { updateProjects } from '../../utils/context'
+import { getElasedTimeFromProject } from '../../utils/dates'
 import { Button, Grid, Header, List } from 'semantic-ui-react'
  
 const Projects = () => {
@@ -15,20 +16,32 @@ const Projects = () => {
   const [currentProject, setCurrentProject] = useState({})
 
   const handleNewProject = () => {
-    alert( currentProject.name + ' created!')
+    let mockProject = {
+      id: state.projects.length + 1,
+      name: currentProject.name,
+      items: [],
+      count: 0,
+      elapsed: 0
+    }
+    dispatch({ type: 'SET_PROJECTS', payload: [...state.projects, mockProject] })
+
     setNewModal(false)
     setCurrentProject({})
   }
 
   const handleEditProject = () => {
-    alert('Project ' + currentProject.name + ' updated!')
+    updateProjects(state, dispatch, currentProject)
+
     setEditModal(false)
     setCurrentProject({})
   }
 
   const handleDeleteProject = () => {
     if ( confirm('Are you sure you want to delete this project?') ) {
-      // Temporary, this should delete the project
+
+      let newProjects = state.projects.filter(project => project.id !== currentProject.id)
+      dispatch({ type: 'SET_PROJECTS', payload: newProjects })
+
       setEditModal(false)
       setCurrentProject({})
     } else {
@@ -90,9 +103,9 @@ const Projects = () => {
                 { project.name }
               </List.Header>
               <List.Description>
-                Tasks in this project: { project.count } 
+                Tasks in this project: { project.items.length } 
                 {' | '} 
-                Total time elapsed: { getDurationMinutes(project.elapsed) }
+                Total time elapsed: { getElasedTimeFromProject(project) }
               </List.Description>
             </List.Content>
           </List.Item>  
