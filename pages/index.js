@@ -78,8 +78,20 @@ const Home = () => {
         />
       )
     } else {
-      // Timer thingy
-      return null
+      return (
+        <Note
+        color='purple'
+        route='/tasks'
+        link='Stop a task'
+        title="🤓 You're working on a task."
+        message={`
+        Currently you're working on ${working.name}, good job!
+        `}
+        onClick={() => {
+          dispatch({ type: 'SET_ACTIVE_TAB', payload: '/tasks' })
+        }}
+        />
+      )
     }
   }
 
